@@ -296,6 +296,77 @@ sudo sysctl -p
 
 ################ 3.4 Uncommon Network Protocols
 
+# ------- Ensure DCCP is disabled 
+
+{
+  l_mname="dccp" # set module name
+  if ! modprobe -n -v "$l_mname" | grep -P -- '^\h*install\/bin\/(true|false)'; then
+    echo -e " - setting module: \"$l_mname\" to be not loadable"
+    echo -e "install $l_mname /bin/false" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+  if lsmod | grep "$l_mname" > /dev/null 2>&1; then 
+  echo -e " - unloading module \"$l_mname\""
+  modprobe -r "$l_mname"
+  fi
+  if ! grep -Pq -- "^\h*blacklist\h+$l_mname\b" /etc/modprobe.d/*; then
+  echo -e " - deny listing \"$l_mname\""
+  echo -e "blacklist $l_mname" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+}
+
+# ------- Ensure SCTP is disabled 
+
+{
+  l_mname="sctp" # set module name
+  if ! modprobe -n -v "$l_mname" | grep -P -- '^\h*install\/bin\/(true|false)'; then
+  echo -e " - setting module: \"$l_mname\" to be not loadable"
+  echo -e "install $l_mname /bin/false" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+  if lsmod | grep "$l_mname" > /dev/null 2>&1; then
+  echo -e " - unloading module \"$l_mname\""
+  modprobe -r "$l_mname"
+  fi
+  if ! grep -Pq -- "^\h*blacklist\h+$l_mname\b" /etc/modprobe.d/*; then
+  echo -e " - deny listing \"$l_mname\""
+  echo -e "blacklist $l_mname" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+}
+
+# ------- Ensure RDS is disabled 
+
+{
+  l_mname="rds" # set module name
+  if ! modprobe -n -v "$l_mname" | grep -P -- '^\h*install\/bin\/(true|false)'; then
+  echo -e " - setting module: \"$l_mname\" to be not loadable"
+  echo -e "install $l_mname /bin/false" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+  if lsmod | grep "$l_mname" > /dev/null 2>&1; then
+  echo -e " - unloading module \"$l_mname\""
+  modprobe -r "$l_mname"
+  fi
+  if ! grep -Pq -- "^\h*blacklist\h+$l_mname\b" /etc/modprobe.d/*; then
+  echo -e " - deny listing \"$l_mname\""
+  echo -e "blacklist $l_mname" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+}
+
+# ------- Ensure TIPC is disabled 
+
+{
+l_mname="tipc" # set module name
+  if ! modprobe -n -v "$l_mname" | grep -P -- '^\h*install\/bin\/(true|false)'; then
+  echo -e " - setting module: \"$l_mname\" to be not loadable"
+  echo -e "install $l_mname /bin/false" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+  if lsmod | grep "$l_mname" > /dev/null 2>&1; then
+  echo -e " - unloading module \"$l_mname\""
+  modprobe -r "$l_mname"
+  fi
+  if ! grep -Pq -- "^\h*blacklist\h+$l_mname\b" /etc/modprobe.d/*; then
+  echo -e " - deny listing \"$l_mname\""
+  echo -e "blacklist $l_mname" >> /etc/modprobe.d/"$l_mname".conf
+  fi
+}
 
 
 ################ 3.5 Firewall Configuration (Host only)
@@ -364,7 +435,37 @@ nft add rule inet filter forward drop
 ############################ 4. Logging and auditing
 ################ 4.1 Configure System Accounting (auditd)
 ############ 4.1.1 Ensure auditing is enabled
+
+# ------- Ensure auditd is installed 
+apt install auditd audispd-plugins
+
+# ------- Ensure auditd service is enabled and active 
+systemctl --now enable auditd
+
+# ------- Ensure auditing for processes that start prior to auditd is enabled  
+update-grub
+
+# ------- Ensure audit_backlog_limit is sufficient  
+update-grub
+
 ############ 4.1.2 Configure Data Retention
+
+# ------- Ensure audit log storage size is configured   
+
+# Set the max log file size to 100 MB, you can change it
+sudo sed -i 's/^max_log_file[[:space:]]*=[[:space:]]*[0-9]*$/max_log_file = 100/' /etc/audit/auditd.conf
+sudo systemctl reload auditd.service
+
+# ------- Ensure audit logs are not automatically deleted   
+
+# Set the max log retention to unlimited
+sudo sed -i 's/^max_log_file_action[[:space:]]*=[[:space:]]*[[:alpha:]]*$/max_log_file_action = keep_logs/' /etc/audit/auditd.conf
+sudo systemctl reload auditd.service
+
+# ------- Ensure system is disabled when audit logs are full   
+
+
+
 ############ 4.1.3 Configure auditd rules
 ############ 4.1.4 Configure auditd file access
 ################ 4.2 Configure Logging
