@@ -38,7 +38,41 @@ sudo ln -s /tmp_new /tmp
 
 ############## 3. Network configuration
 
-######## 3.5.1 Configure UncomplicatedFirewall
+######## 3.1 Disable unused network protocols and devices
+
+# Disable IPV6
+echo "Disabling IPV6"
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+sysctl -p
+
+# Disable wireless interfaces
+echo "Disabling wireless interfaces"
+ifconfig -a | grep wlan | awk '{print $1}' | while read interface; do
+  ifconfig $interface down
+  echo "Wireless interface $interface has been disabled"
+done
+
+######## 3.2 Network parameters (Host only)
+
+# Ensure packet redirect sending is disabled
+echo "net.ipv4.conf.all.send_redirects=0" >> /etc/sysctl.conf
+echo "net.ipv4.conf.default.send_redirects=0" >> /etc/sysctl.conf
+echo "net.ipv4.conf.all.accept_redirects=0" >> /etc/sysctl.conf
+echo "net.ipv4.conf.default.accept_redirects=0" >> /etc/sysctl.conf
+
+# Ensure IP forwarding is disabled
+echo "net.ipv4.ip_forward=0" >> /etc/sysctl.conf
+
+# Reload sysctl configuration
+sysctl -p
+
+
+
+######## 3.5 Firewall Configuration (Host only)
+
+###### 3.5.1 Configure UncomplicatedFirewall
 
 # Install ufw if not already installed
 sudo apt-get -y install ufw
@@ -61,7 +95,7 @@ sudo ufw allow in on lo
 # Set ufw default deny policy
 
 
-######## 3.5.2 Configure nftables
+###### 3.5.2 Configure nftables
 
 
 # Ensure nftables is installed
