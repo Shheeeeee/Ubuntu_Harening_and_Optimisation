@@ -3,7 +3,7 @@
 
 > __Note__  
 
-WIP Based on CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0
+Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https://downloads.cisecurity.org/#/).
 
 ## Initial Setup
 
