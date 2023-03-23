@@ -37,9 +37,9 @@ WIP Based on CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0
 
 # 3.5.2 Configure nftables
 
-- [ ] Ensure nftables is installed
-- [ ] Ensure ufw is uninstalled or disabled with nftables 
-- [ ] Ensure iptables are flushed with nftables
+- [x] Ensure nftables is installed
+- [x] Ensure ufw is uninstalled or disabled with nftables 
+- [x] Ensure iptables are flushed with nftables
 - [ ] Ensure a nftables table exists 
 - [ ] Ensure nftables base chains exist
 - [ ] Ensure nftables loopback traffic is configured 
