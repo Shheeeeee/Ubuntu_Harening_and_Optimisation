@@ -24,7 +24,28 @@ Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https:/
 
 ## 3. Network configuration
 
-### 3.5.1 Configure UncomplicatedFirewall
+### 3.1 Disable unused network protocols and devices
+
+- [x] Disable IPV6  
+- [x] Disable wireless interfaces  
+
+### 3.2 Network parameters (Host only)
+
+- [x] Ensure packet redirect sending is disabled  
+- [x] Ensure IP forwarding is disabled  
+
+
+### 3.3 Network parameters (Host & Router)
+
+
+
+### 3.4 Uncommon Network Protocols
+
+
+
+### 3.5 Firewall Configuration (Host only)
+
+#### 3.5.1 Configure UncomplicatedFirewall
 
 - [x] Ensure ufw is installed
 - [x] Ensure iptables-persistent is not installed with ufw 
@@ -35,7 +56,7 @@ Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https:/
 - [ ] Ensure ufw default deny firewall policy (manually done)
 
 
-### 3.5.2 Configure nftables
+#### 3.5.2 Configure nftables
 
 - [x] Ensure nftables is installed
 - [x] Ensure ufw is uninstalled or disabled with nftables 
