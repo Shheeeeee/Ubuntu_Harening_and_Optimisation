@@ -70,6 +70,9 @@ echo "net.ipv4.ip_forward=0" >> /etc/sysctl.conf
 # Reload sysctl configuration
 sysctl -p
 
+######## 3.3 Network parameters (Host and Router
+)
+######## 3.4 Uncommon Network Protocols
 
 ######## 3.5 Firewall Configuration (Host only)
 
