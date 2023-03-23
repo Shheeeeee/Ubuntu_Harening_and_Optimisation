@@ -85,4 +85,35 @@ Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https:/
 - [ ] Ensure nftables service is enabled
 - [ ] Ensure nftables rules are permanent 
 
+#### 3.5.3 Configure iptables
+##### 3.5.3.1 Configure ipatables software
+##### 3.5.3.1 Configure IPV4 iptables
+##### 3.5.3.1 Configure IPV6 ipatables
+
+## 4. Logging and auditing
+### 4.1 Configure System Accounting (auditd)
+#### 4.1.1 Ensure auditing is enabled
+#### 4.1.2 Configure Data Retention
+#### 4.1.3 Configure auditd rules
+#### 4.1.4 Configure auditd file access
+### 4.2 Configure Logging
+#### 4.2.1 Configure journald
+##### 4.2.1.1 Ensure journald is configured to send logs to a remote log host
+#### 4.2.2 Configure rsyslog
+
+## 5. Access, Authentification and Authorization
+### 5.1 Configure time-based job schedulers
+### 5.2 Configure SSH Server
+### 5.3 Configure privilege escalation
+### 5.4 Configure PAM
+### 5.5 User Accounts and Environement
+#### 5.5.1 Set Shadow Password Suite Parameters
+
+## 6. System Maintenance
+### 6.1 System File Permissions
+### 6.2 Local User and Group Settings
+
+
+
+
 
