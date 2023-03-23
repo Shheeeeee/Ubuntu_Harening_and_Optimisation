@@ -8,13 +8,13 @@ WIP Based on CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0
 ## Initial Setup
 
 
-## Disable unused filesystems
+### 1.1.1 Disable unused filesystems
 
 - [x] Disable mounting of cramfs filesystems  
 - [x] Disable mounting of squashfs filesystems  
 - [x] Disable mounting of udf filesystems  
 
-## Configure /tmp
+### 1.1.2 Configure /tmp
 
 - [x] Ensure /tmp is a separate partition 
 - [x] Ensure nodev option set on /tmp partition
@@ -22,9 +22,9 @@ WIP Based on CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0
 - [x] Ensure nosuid option set on /tmp partition
 
 
-### 3. Network configuration
+## 3. Network configuration
 
-# 3.5.1 Configure UncomplicatedFirewall
+### 3.5.1 Configure UncomplicatedFirewall
 
 - [x] Ensure ufw is installed
 - [x] Ensure iptables-persistent is not installed with ufw 
@@ -35,7 +35,7 @@ WIP Based on CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0
 - [ ] Ensure ufw default deny firewall policy (manually done)
 
 
-# 3.5.2 Configure nftables
+### 3.5.2 Configure nftables
 
 - [x] Ensure nftables is installed
 - [x] Ensure ufw is uninstalled or disabled with nftables 
