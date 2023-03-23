@@ -1,4 +1,4 @@
-# Ubuntu Harening and Optimisation script
+# Ubuntu Hardening and Optimisation script
 
 
 > __Note__  
@@ -148,7 +148,18 @@ If you want to remove any another package that you don't need, juste insert his 
 ## 4. Logging and auditing
 ### 4.1 Configure System Accounting (auditd)
 #### 4.1.1 Ensure auditing is enabled
+
+- [x] Ensure auditd is installed 
+- [x] Ensure auditd service is enabled and active 
+- [x] Ensure auditing for processes that start prior to auditd is enabled  
+- [x] Ensure audit_backlog_limit is sufficient
+
 #### 4.1.2 Configure Data Retention
+
+- [x] Ensure audit log storage size is configured   
+- [x] Ensure audit logs are not automatically deleted   
+- [ ] Ensure Ensure system is disabled when audit logs are full 
+
 #### 4.1.3 Configure auditd rules
 #### 4.1.4 Configure auditd file access
 ### 4.2 Configure Logging
