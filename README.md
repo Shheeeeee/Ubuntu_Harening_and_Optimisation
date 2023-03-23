@@ -25,7 +25,7 @@ Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https:/
 #### 1.1.5 Configure /var/log
 #### 1.1.6 Configure /var/log/audit
 #### 1.1.7 Configure /home
-#### 1.1.7 Configure /dev/shm
+#### 1.1.8 Configure /dev/shm
 ### 1.2 Configure Software Uptdates
 ### 1.3 Filesystem Integrity Checking
 ### 1.4 Secure Boot Settings
@@ -38,14 +38,55 @@ Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https:/
 ## 2. Services
 ### 2.1 Configure Time Synchronization
 #### 2.1.1 Ensure time sychronization is in use
+> __Warning__  you need to choose only one of the 3 following time sychronization tools (chrony or systemd-timesyncd or ntp). And then only configure the one that you chose.
+ 
+- [x] Install chrony
+- [x] Install systemd-timesyncd (commented)
+- [x] Install ntp (commented)
+
 #### 2.1.2 Configure chrony
+
+- [x] Ensure chrony is configured with authorized timeserver (may need to be manually done)
+- [x] Ensure chrony is running as user _chrony 
+- [x] Ensure chrony is enabled and running 
+
 #### 2.1.3 Configure systemd-timesyncd
+/////
 #### 2.1.4 configure ntp
+//////
+
 ### 2.2 Special Purpose Services
+
+- [x] Ensure X Window System is not installed 
+- [x] Ensure Avahi Server is not installed 
+- [x] Ensure CUPS is not installed 
+- [x] Ensure DHCP Server is not installed 
+- [x] Ensure LDAP server is not installed
+- [x] Ensure NFS is not installed 
+- [x] Ensure DNS Server is not installed 
+- [x] Ensure FTP Server is not installed 
+- [x] Ensure HTTP server is not installed 
+- [x] Ensure IMAP and POP3 server are not installed
+- [x] Ensure Samba is not installed 
+- [x] Ensure HTTP Proxy Server is not installed 
+- [x] Ensure SNMP Server is not installed 
+- [x] Ensure NIS Server is not installed 
+- [x] Ensure mail transfer agent is configured for local-only mode 
+- [x] Ensure rsync service is either not installed or masked
+
 ### 2.3 Service Clients
 
-## 3. Network configuration
+- [x] Ensure NIS Client is not installed   
+- [x] Ensure rsh client is not installed   
+- [x] Ensure talk client is not installed  
+- [x] Ensure telnet client is not installed  
+- [x] Ensure LDAP server is not installed  
+- [x] Ensure RPC is not installed   
 
+### 2.4 Ensure nonessential services are removed or masked
+If you want to remove any another package that you don't need, juste insert his name in the script and uncomment the line. 
+
+## 3. Network configuration
 ### 3.1 Disable unused network protocols and devices
 
 - [x] Disable IPV6  
@@ -56,11 +97,21 @@ Work in progress, Based on [CIS_Ubuntu_Linux_22.04_LTS_Benchmark_v1.0.0](https:/
 - [x] Ensure packet redirect sending is disabled  
 - [x] Ensure IP forwarding is disabled  
 
-
 ### 3.3 Network parameters (Host & Router)
-### 3.4 Uncommon Network Protocols
-### 3.5 Firewall Configuration (Host only)
 
+- [x] Ensure source routed packets are not accepted  
+- [x] Ensure ICMP redirects are not accepted
+- [x] Ensure secure ICMP redirects are not accepted
+- [x] Ensure suspicious packets are logged 
+- [x] Ensure broadcast ICMP requests are ignored 
+- [x] Ensure bogus ICMP responses are ignored 
+- [x] Ensure Reverse Path Filtering is enabledEnsure TCP SYN Cookies is enabled  bogus ICMP responses are ignored 
+- [x] Ensure IPv6 router advertisements are not accepted
+
+### 3.4 Uncommon Network Protocols
+
+
+### 3.5 Firewall Configuration (Host only)
 #### 3.5.1 Configure UncomplicatedFirewall
 
 - [x] Ensure ufw is installed
