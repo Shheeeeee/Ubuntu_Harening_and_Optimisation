@@ -1,9 +1,11 @@
 #!/bin/bash
 
 
-### Initial setup
+############## 1. Initial setup
 
-## Disable unused filesystems
+######## 1.1 Filesystem Configuration
+
+###### 1.1.1 Disable unused filesystems
 
 # Disable mounting of cramfs filesystems
 echo "install cramfs /bin/true" > /etc/modprobe.d/cramfs.conf
@@ -14,7 +16,8 @@ echo "install squashfs /bin/true" > /etc/modprobe.d/squashfs.conf
 # Disable mounting of udf filesystems
 echo "install udf /bin/true" > /etc/modprobe.d/udf.conf
 
-## Configure /tmp
+
+###### 1.1.2 Configure /tmp
 
 # Create a new partition for /tmp
 sudo mkdir /tmp_new
@@ -32,8 +35,6 @@ echo "/tmp_new /tmp none rw,nodev,noexec,nosuid,strictatime 0 0" | sudo tee -a /
 # Remove the old /tmp directory and symlink to the new one
 sudo rm -rf /tmp
 sudo ln -s /tmp_new /tmp
-
-
 
 
 ############## 3. Network configuration
@@ -54,6 +55,7 @@ ifconfig -a | grep wlan | awk '{print $1}' | while read interface; do
   echo "Wireless interface $interface has been disabled"
 done
 
+
 ######## 3.2 Network parameters (Host only)
 
 # Ensure packet redirect sending is disabled
@@ -67,7 +69,6 @@ echo "net.ipv4.ip_forward=0" >> /etc/sysctl.conf
 
 # Reload sysctl configuration
 sysctl -p
-
 
 
 ######## 3.5 Firewall Configuration (Host only)
