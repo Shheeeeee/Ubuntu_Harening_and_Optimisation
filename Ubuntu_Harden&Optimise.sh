@@ -33,3 +33,68 @@ echo "/tmp_new /tmp none rw,nodev,noexec,nosuid,strictatime 0 0" | sudo tee -a /
 sudo rm -rf /tmp
 sudo ln -s /tmp_new /tmp
 
+
+
+
+############## 3. Network configuration
+
+######## 3.5.1 Configure UncomplicatedFirewall
+
+# Install ufw if not already installed
+sudo apt-get -y install ufw
+
+# Uninstall iptables-persistent if installed
+sudo apt-get -y remove iptables-persistent
+
+# Enable ufw service
+sudo systemctl enable ufw
+
+# Configure ufw loopback traffic
+sudo ufw allow in on lo
+
+# Configure ufw outbound connections
+
+
+# Configure ufw firewall rules for all open ports
+
+
+# Set ufw default deny policy
+
+
+######## 3.5.2 Configure nftables
+
+
+# Ensure nftables is installed
+apt-get install nftables -y
+
+# Ensure ufw is uninstalled or disabled with nftables
+ufw disable
+
+# Ensure iptables are flushed with nftables
+iptables -F
+iptables -X
+
+# Ensure a nftables table exists
+nft add table inet filter
+
+# Ensure nftables base chains exist
+nft add chain inet filter input { type filter hook input priority 0 \; }
+nft add chain inet filter forward { type filter hook forward priority 0 \; }
+nft add chain inet filter output { type filter hook output priority 0 \; }
+
+# Ensure nftables loopback traffic is configured
+nft add rule inet filter input iif lo accept
+nft add rule inet filter output oif lo accept
+
+# Ensure nftables outbound and established connections are configured
+nft add rule inet filter input ct state established,related accept
+nft add rule inet filter output ct state established,related accept
+
+# Ensure nftables default deny firewall policy
+nft add rule inet filter input drop
+nft add rule inet filter forward drop
+
+
+
+
+
