@@ -110,6 +110,10 @@ If you want to remove any another package that you don't need, juste insert his 
 
 ### 3.4 Uncommon Network Protocols
 
+- [x] Ensure DCCP is disabled 
+- [x] Ensure SCTP is disabled
+- [x] Ensure RDS is disabled 
+- [x] Ensure TIPC is disabled
 
 ### 3.5 Firewall Configuration (Host only)
 #### 3.5.1 Configure UncomplicatedFirewall
